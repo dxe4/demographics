@@ -25,7 +25,7 @@ constituency_turnout <- "data/constituency_turnout.csv" %>%
 constituency_lookup <- "data/GB_wards_2017/constituency_lookup.csv" %>%
   read_csv() %>%
   transform(
-    code_ward = WD17CD,
+    code_ward = as.character(WD17CD),
     name_ward = WD17NM,
     code_constituency = PCON17CD,
     name_constituency = PCON17NM) %>%
@@ -34,7 +34,7 @@ constituency_lookup <- "data/GB_wards_2017/constituency_lookup.csv" %>%
 ward_pop <- "data/ward_pop_f30to45.csv" %>%
   read_csv() %>%
   transform(
-    code_ward = ward,
+    code_ward = as.character(ward),
     women_age30to45 = `30-45w`,
     population = pop) %>%
   unique()
@@ -42,7 +42,7 @@ ward_pop <- "data/ward_pop_f30to45.csv" %>%
 postcode_sector_lookup <- "data/postcode_sector_lookup.csv" %>%
   read_csv() %>%
   transform(
-    code_ward = `Ward Code`,
+    code_ward = as.character(`Ward Code`),
     code_constituency = `Parliamentary Constituency Code`,
     name_constituency = `Parliamentary Constituency Name`,
     code_euregion = `European Electoral Region Code`,
@@ -87,11 +87,15 @@ df_tidy <- df_joined %>%
   ) %>%
   arrange(desc(women_age30to45))
 
+feather::write_feather(x = df_tidy, path = "data/tidy_data.feather")
 
 ggplot(df_tidy, aes(
   x = women_age30to45, 
   y = turnout, 
   size = tot_electorate)) +
-  geom_point(alpha = .5)
+  geom_point(alpha = .5) +
+  theme_minimal() +
+  xlab("Percentage of Women aged 30 to 45") +
+  ylab("Election turnout in the 2015 election")
 
 
