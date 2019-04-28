@@ -28,6 +28,7 @@ ADD NOTES ON WHAT THIS GIVES US AND WHAT ELSE WE MIGHT DO (using Ian's local non
 ### areas_lat_lon.csv
 
 ### constituency_turnout.csv
+
 Data showing the turnout and electorate size for all 650 UK constituencies at the 2015 general election (the same info for the 2017 general election was not available so this was considered a good proxy). The data was scraped from http://www.ukpolitical.info/Turnout15.htm.
 
 ### density.csv
@@ -37,6 +38,8 @@ Data showing the turnout and electorate size for all 650 UK constituencies at th
 ### health.csv
 
 ### postcode_sector_lookup.csv
+
+Original data set was the National Statistics Postcode Lookup (NSPL) table for the United Kingdom. For further details read postcode_sector_lookup_creation.ipynb in data folder.
 
 ### r21ukrttableks102ukladv1_tcm77-330434 - r21ukrttableks102ukladv1_tcm77-330479.xls
 
@@ -69,7 +72,7 @@ Master data frame with combined information from disparate sources. This was gen
 **TODO** can anyone who wrote code please note the high-level process. The goal would be to let one of us (or a likeminded soul) follow the flow of code and data in e.g. 6 months time - so add enough detail to assume that we've forgotten everything and need some nudges in the right direction please.
 
 
-`01_etl.R` reads data from a number of `csv`s and later writes `tidy_data.feather`.
+`spatial_data.R` reads `ward_pop_f30to45.csv` and later writes `tidy_data.feather`.
 
 ## Contributors
 
