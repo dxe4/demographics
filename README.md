@@ -79,7 +79,7 @@ Master data frame with combined information from disparate sources. This was gen
 * jdleesmiller
 * Laurens Geffert, @JanLauGe, https://www.linkedin.com/in/laurensgeffert/
 * Pranay
-* Nafiz Huq / Nick
+* Nick Rhodes, https://www.linkedin.com/in/nickorhodes
 
 ### Thanks to
 
