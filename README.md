@@ -8,7 +8,9 @@ This scatterplot is a first result. It shows (for most of the 650 Constituencies
 
 'Voter engagement' is calculated by taking the percentage of people who voted in the 2015 General Election (a 'normal' election, unlike the 2017 rushed GE) and the enrolled population size who are eligible to vote in that Constituency. Some Constituencies have a much lower turn-out than others (range circa 52-78%, most are in the range 60-75%).
 
-__Note__ that this is a proxy for engagement and it is likely to be noisy. It was noted by colleagues (hat tip Sym) in the DemocracyClub slack that using 1 GE will be noisy and we'd do better to calculate engagement by averaging results over several elections, this could be a __future project__.
+_Note_ that this is a proxy for engagement and it is likely to be noisy. It was noted by colleagues (hat tip Sym) in the DemocracyClub slack that using 1 GE will be noisy and we'd do better to calculate engagement by averaging results over several elections, this could be a _future project_.
+
+ADD NOTES ON WHAT THIS GIVES US AND WHAT ELSE WE MIGHT DO (using Ian's local non-committed text file)
 
 * Project source: https://github.com/dxe4/demographics
 * Slack: #targeted-demographics
@@ -70,3 +72,13 @@ Note folder has a small readme by Laurens (?)
 * Pranay
 * Nafiz Huq / Nick
 
+### Thanks to
+
+* jonathanf (DemocracyClub)
+* sym (DemocracyClub)
+
+## Future
+
+* We could try averaging voter turnout by Constituency for several elections
+* We could try getting the public electoral role for the Open Register, it should be a good proxy for voter enrollment despite people opting out (hatip chris48s in DemocracyClub)
+* Sym noted that http://manchester.academia.edu/RobertFord might have open ward-level data
