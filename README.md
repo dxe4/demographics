@@ -1,11 +1,11 @@
 # Targeted-demographics to increase turnout in the 2019 EU election
 We came together at a hackathon to use data to improve voter engagement for the 2019 EU election. We gathered data from a number of disparate sources and aggregated it to allow for better prioritisation of efforts for voter mobilisation. Data came at different spatial resolutions, from postcode sectors over wards to constituencies. The map below shows some of the variables we obtained at the constituency level:
 
-![](maps.png)
+![](out/maps.png)
 
 The scatterplot below shows (for most of the 650 Constituencies) the proportion of 'voter engagement' vs women in a target demographic, each point is sized by the enrolled voter population in that Constituency. 'Voter engagement' is calculated by taking the percentage of people who voted in the 2015 General Election (a 'normal' election, unlike the 2017 rushed GE) and the enrolled population size who are eligible to vote in that Constituency. Some Constituencies have a much lower turn-out than others (range circa 52-78%, most are in the range 60-75%).
 
-![](plot_women_vs_turnout.png)
+![](out/plot_women_vs_turnout.png)
 
 _Note_ that this is a proxy for engagement and it is likely to be noisy. It was noted by colleagues (hat tip Sym) in the DemocracyClub slack that using 1 GE will be noisy and we'd do better to calculate engagement by averaging results over several elections, this could be a _future project_.
 
