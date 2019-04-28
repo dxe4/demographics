@@ -16,7 +16,6 @@ ADD NOTES ON WHAT THIS GIVES US AND WHAT ELSE WE MIGHT DO (using Ian's local non
 * Slack: #targeted-demographics
 
 ## Data sources and key files (in `/data`)
-
 **TODO** Can everyone please add some notes about the files they added (including - original location, a sentence or two about the data (e.g. year, intention, any issues or thoughts you have), whether this was an input file to a process or an output file from some of our code) please.
 
 ### EU-referendum-result-data.csv
@@ -37,11 +36,11 @@ Data showing the turnout and electorate size for all 650 UK constituencies at th
 ### health.csv
 
 ### postcode_sector_lookup.csv
+Original data set was the National Statistics Postcode Lookup (NSPL) table for the United Kingdom. For further details read postcode_sector_lookup_creation.ipynb in data folder.
 
 ### r21ukrttableks102ukladv1_tcm77-330434 - r21ukrttableks102ukladv1_tcm77-330479.xls
 
 ### sex.csv
-
 Count of M/F and population size per Ward. 521 rows.
 
 ### ward-codes-w-30-45.csv
@@ -69,7 +68,7 @@ Master data frame with combined information from disparate sources. This was gen
 **TODO** can anyone who wrote code please note the high-level process. The goal would be to let one of us (or a likeminded soul) follow the flow of code and data in e.g. 6 months time - so add enough detail to assume that we've forgotten everything and need some nudges in the right direction please.
 
 
-`01_etl.R` reads data from a number of `csv`s and later writes `tidy_data.feather`.
+`spatial_data.R` reads `ward_pop_f30to45.csv` and later writes `tidy_data.feather`.
 
 ## Contributors
 
