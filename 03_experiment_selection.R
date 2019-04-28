@@ -6,7 +6,7 @@ library(sf)
 library(sp)
 library(feather)
 
-df_tidy <- read_feather(path = "data/tidy_data.feather")
+df_tidy <- read_feather(path = "out/tidy_data.feather")
 
 # target post code sectors
 target_constituencies <- df_tidy %>%
@@ -15,7 +15,7 @@ target_constituencies <- df_tidy %>%
   mutate(pclist = str_split(postcode_sectors, ",")) %>%
   select(-postcode_sectors)
 # random control group
-postcode_sector_lookup <- read_feather("data/postcode_sector_lookup.feather")
+postcode_sector_lookup <- read_feather("out/postcode_sector_lookup.feather")
 set.seed(3)
 out_cntrl <- postcode_sector_lookup$postcode_sectors %>%
   str_split(",") %>%
@@ -23,8 +23,8 @@ out_cntrl <- postcode_sector_lookup$postcode_sectors %>%
   sample(size = 100)
 
 # write output
-file_delete("experiment_postcodes.txt")
-file_create("experiment_postcodes.txt")
+file_delete("out/experiment_postcodes.txt")
+file_create("out/experiment_postcodes.txt")
 for (const in target_constituencies[["name_constituency"]]) {
   x <- target_constituencies %>% 
     filter(name_constituency == const) %>%
@@ -33,15 +33,15 @@ for (const in target_constituencies[["name_constituency"]]) {
     str_replace("^\\s", "")
   write_lines(
     x = const,
-    path = "experiment_postcodes.txt",
+    path = "out/experiment_postcodes.txt",
     append = TRUE)
   write_lines(
     x = x, 
-    path = "experiment_postcodes.txt",
+    path = "out/experiment_postcodes.txt",
     append = TRUE)
 }
 # add control group to output
 write_lines(
   x = c("Control Group", out_cntrl), 
-  path = "experiment_postcodes.txt",
+  path = "out/experiment_postcodes.txt",
   append = TRUE)
