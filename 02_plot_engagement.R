@@ -7,7 +7,7 @@ library(sp)
 library(feather)
 library(gridExtra)
 
-df_constituencies <- read_feather(path = "out/constituency_data.feather")
+df_constituencies <- read_rds(path = "out/constituency_data.rds")
 
 # plot maps
 
@@ -37,7 +37,7 @@ ggp2 <- df_constituencies %>%
     legend.title = element_blank())
 
 ggp3 <- df_constituencies %>%
-  transmute(women_age30to45 = women_age30to45 * 100) %>%
+  select(women_age30to45) %>%
   mutate(women_age30to45 = case_when(
     women_age30to45 == 0.0 ~ NA_real_,
     TRUE ~ women_age30to45)) %>%

@@ -6,7 +6,7 @@ library(sf)
 library(sp)
 library(feather)
 
-df_tidy <- read_feather(path = "out/tidy_data.feather")
+df_tidy <- read_feather(path = "out/constituency_data.feather")
 
 # target post code sectors
 target_constituencies <- df_tidy %>%
@@ -15,7 +15,7 @@ target_constituencies <- df_tidy %>%
   mutate(pclist = str_split(postcode_sectors, ",")) %>%
   select(-postcode_sectors)
 # random control group
-postcode_sector_lookup <- read_feather("out/postcode_sector_lookup.feather")
+postcode_sector_lookup <- read_feather("data/postcode_sector_lookup.feather")
 set.seed(3)
 out_cntrl <- postcode_sector_lookup$postcode_sectors %>%
   str_split(",") %>%
@@ -45,3 +45,4 @@ write_lines(
   x = c("Control Group", out_cntrl), 
   path = "out/experiment_postcodes.txt",
   append = TRUE)
+

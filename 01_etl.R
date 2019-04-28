@@ -87,7 +87,7 @@ df_constituencies <- df_joined %>%
     tot_pop = sum(population),
     tot_electorate = sum(unique(count_electorate)),
     turnout = sum(population * perc_turnout) / tot_pop,
-    women_age30to45 = sum(population * women_age30to45) / tot_pop,
+    women_age30to45 = (sum(population * women_age30to45) / tot_pop) * 100,
     postcode_sectors = str_c(postcode_sectors, collapse = ", "),
     do_union = TRUE) %>%
   # simplify geometries
@@ -129,6 +129,10 @@ df_constituencies <- df_constituencies %>%
       summarise_all(mean, na.rm = TRUE),
     by = "code_constituency")
 
-write_feather(x = df_constituencies, path = "out/constituency_data.feather")
+write_rds(df_constituencies, path = "out/constituency_data.rds")
+df_constituencies %>%
+  as_tibble() %>%
+  select(-geometry) %>%
+  write_feather(path = "out/constituency_data.feather")
 
 
