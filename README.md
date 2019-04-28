@@ -100,3 +100,13 @@ Master data frame with combined information from disparate sources. This was gen
 * We could try getting the public electoral role for the Open Register, it should be a good proxy for voter enrollment despite people opting out (hatip chris48s in DemocracyClub)
 * Sym noted that http://manchester.academia.edu/RobertFord might have open ward-level data
 * Another source of data: the [British Election Study](https://www.britishelectionstudy.com/) wave 14 from May 2018. We also wrote some code to target at Local Authority District or NUTS2 level using these data: https://github.com/TechForUK/british_election_study
+* http://takepart.london/ was written in part by Sym, he notes that it has 500 Int Server errors and that these won't be fixed, it was built with non-public electoral role data
+* We could get the postcodes for the Revoke Article 50 petition and use these as another source of 'where to get support' if voter turnout was low
+* https://www.electoralcalculus.co.uk/homepage.html has projections of Ward level (not Constituency level) voter intentions, we could use this (but have to scrape it) for better targeting
+* A linear model could be built to let us rank the projected 650 Constituencies by 'preference' for whatever metric we like
+
+## Thoughts
+
+* Averaging voter turnout for several elections is more likely to show us the 'truth' that just the GE 2015
+  * We used Turnout15, we also have 2010, 2005, 2001, 1997 via http://www.ukpolitical.info/Turnout45.htm
+* Slicing the data in different ways gives us ways to run many experiments
