@@ -81,6 +81,18 @@ Master data frame with combined information from disparate sources. This was gen
 
 `titled.ipynb` and `Untitled.ipynb` appear to do some work on the health data (via Harry perhaps?) and these Notebooks produce no output.
 
+## Note from Mel on "who we might target"
+
+```
+EU Election targeting breakdown:·       Students;
+·       Women (esp 30-45)
+·       The under 45s;
+·       Non-British EU nationals living in the UK (note that for the EP elections, they need to complete an additional form AND return it to their electoral office 12 working days before the election (ie. 7th May)
+·       Non-British EU nationals (and their families) living in the UK
+·       Commonwealth citizens - these can be further split into regions, eg Asia, ANZ, Caribbean etc
+·       BAME voters
+```
+
 ## Contributors
 * AlexG
 * Emiliano Cancellieri, https://www.linkedin.com/in/emilianocancellieri/
@@ -95,6 +107,20 @@ Master data frame with combined information from disparate sources. This was gen
 * jonathanf (DemocracyClub)
 * sym (DemocracyClub)
 
+## First micro result
+
+Result of test by Pranay overnight on a small ad sample
+
+```
+Audience    Unique Reach    Click-through Rate
+Control Group 	3354    	14.71%
+Kensington  	64 		0
+Barking    	51 		0
+Slough    	204 		50%
+Hackney North  	439  		22.22%
+Hackney South 	558  		7.69%
+```
+
 ## Future
 * We could try averaging voter turnout by Constituency for several elections
 * We could try getting the public electoral role for the Open Register, it should be a good proxy for voter enrollment despite people opting out (hatip chris48s in DemocracyClub)
@@ -102,11 +128,22 @@ Master data frame with combined information from disparate sources. This was gen
 * Another source of data: the [British Election Study](https://www.britishelectionstudy.com/) wave 14 from May 2018. We also wrote some code to target at Local Authority District or NUTS2 level using these data: https://github.com/TechForUK/british_election_study
 * http://takepart.london/ was written in part by Sym, he notes that it has 500 Int Server errors and that these won't be fixed, it was built with non-public electoral role data
 * We could get the postcodes for the Revoke Article 50 petition and use these as another source of 'where to get support' if voter turnout was low
+  * https://www.livefrombrexit.com/petitions/241584
 * https://www.electoralcalculus.co.uk/homepage.html has projections of Ward level (not Constituency level) voter intentions, we could use this (but have to scrape it) for better targeting
+  * note Laurens found: https://www.electoralcalculus.co.uk/flatfile.html
 * A linear model could be built to let us rank the projected 650 Constituencies by 'preference' for whatever metric we like
+* Harry used http://convertjson.com/html-table-to-json.htm to convert an HTML table to JSON giving https://gist.github.com/dxe4/ebef97bf22ca3bcad220b73a37dc37e9 for turnouts from  http://www.ukpolitical.info/Turnout45.htm
+* https://opendata.camden.gov.uk/Maps/National-Statistics-Postcode-Lookup-UK/tr8t-gqz7
+* http://geoportal.statistics.gov.uk/datasets/ward-to-westminster-parliamentary-constituency-to-local-authority-district-december-2016-lookup-in-the-united-kingdom/data
+* https://github.com/TechForUK/british_election_study
+* https://github.com/google/GeoexperimentsResearch
+* https://github.com/jazzmuesli/eupetitions
+* https://en.wikipedia.org/wiki/D'Hondt_method
 
 ## Thoughts
 
 * Averaging voter turnout for several elections is more likely to show us the 'truth' that just the GE 2015
   * We used Turnout15, we also have 2010, 2005, 2001, 1997 via http://www.ukpolitical.info/Turnout45.htm
+  * Use convertjson (above) to trivially turn these tables into JSON!
 * Slicing the data in different ways gives us ways to run many experiments
+  * https://democracyclub.org.uk/reports/whos_missing/
