@@ -1,12 +1,11 @@
 # Targeted-demographics to increase turnout in the 2019 EU election
+We came together at a hackathon to use data to improve voter engagement for the 2019 EU election. We gathered data from a number of disparate sources and aggregated it to allow for better prioritisation of efforts for voter mobilisation. Data came at different spatial resolutions, from postcode sectors over wards to constituencies. The map below shows some of the variables we obtained at the constituency level:
 
-We came together at a hackathon to use data to improve voter engagement for the 2019 EU election. 
+![](maps.png)
 
-This scatterplot is a first result. It shows (for most of the 650 Constituencies) the proportion of 'voter engagement' (see below) vs women in a target demographic, each point is sized by the enrolled voter population in that Constituency:
+The scatterplot below shows (for most of the 650 Constituencies) the proportion of 'voter engagement' vs women in a target demographic, each point is sized by the enrolled voter population in that Constituency. 'Voter engagement' is calculated by taking the percentage of people who voted in the 2015 General Election (a 'normal' election, unlike the 2017 rushed GE) and the enrolled population size who are eligible to vote in that Constituency. Some Constituencies have a much lower turn-out than others (range circa 52-78%, most are in the range 60-75%).
 
 ![](plot_women_vs_turnout.png)
-
-'Voter engagement' is calculated by taking the percentage of people who voted in the 2015 General Election (a 'normal' election, unlike the 2017 rushed GE) and the enrolled population size who are eligible to vote in that Constituency. Some Constituencies have a much lower turn-out than others (range circa 52-78%, most are in the range 60-75%).
 
 _Note_ that this is a proxy for engagement and it is likely to be noisy. It was noted by colleagues (hat tip Sym) in the DemocracyClub slack that using 1 GE will be noisy and we'd do better to calculate engagement by averaging results over several elections, this could be a _future project_.
 
@@ -47,34 +46,27 @@ For each constituency a list of all postcode sectors in that constituency.
 Count of M/F and population size per Ward. 521 rows.
 
 ### ward-codes-w-30-45.csv
-
 DUPLICATE of ward_pop_f30to45.csv (and used in Notebooks) - SHOULD BE DELETED?
 
 ### ward_pop_f30to45.csv
-
 Per Ward counts of electorate (nbr people eligible to vote) and percentage of those who voted in 2015 General Election. 8297 rows.
 
 ### ward_to_local_district.csv
 
 ### GB_wards_2017
-
 Geospatial and tabular data, as well as a lookup table to match wards to constituencies. Downloaded from the Office for National Statistics:
 * http://geoportal.statistics.gov.uk/datasets/wards-december-2017-generalised-clipped-boundaries-in-great-britain
 * http://geoportal.statistics.gov.uk/datasets/ward-to-westminster-parliamentary-constituency-to-local-authority-district-december-2017-lookup-in-the-united-kingdom
 
 ### tidy_data.feather
-
 Master data frame with combined information from disparate sources. This was generated from individual csvs and shapefiles by running `01_etl.R`
 
 ## How to run the code
-
 **TODO** can anyone who wrote code please note the high-level process. The goal would be to let one of us (or a likeminded soul) follow the flow of code and data in e.g. 6 months time - so add enough detail to assume that we've forgotten everything and need some nudges in the right direction please.
 
-
-`spatial_data.R` reads `ward_pop_f30to45.csv` and later writes `tidy_data.feather`.
+`01_etl.R` reads data from different sources and produces a dataset at constituency level in `feather` format (`data/constituency_data.feather`). This data is then used in `02_plots.R` to generate visualisations and `03_experiment_selection.R` to choose a number of postcodes that we conducted geo-experients for. If you are interested in postcode-level data you can also use `data/postcode_sector_data.feather`. However, be aware that some data that wasn't available at postcode sector level was assumed constant for all postcode sectors in a single constituency.
 
 ## Contributors
-
 * AlexG
 * Emiliano Cancellieri
 * harry
@@ -84,13 +76,11 @@ Master data frame with combined information from disparate sources. This was gen
 * Pranay
 * Nafiz Huq / Nick
 
-### Thanks to
-
+## Thanks to
 * jonathanf (DemocracyClub)
 * sym (DemocracyClub)
 
 ## Future
-
 * We could try averaging voter turnout by Constituency for several elections
 * We could try getting the public electoral role for the Open Register, it should be a good proxy for voter enrollment despite people opting out (hatip chris48s in DemocracyClub)
 * Sym noted that http://manchester.academia.edu/RobertFord might have open ward-level data

@@ -5,11 +5,10 @@ library(magrittr)
 library(sf)
 library(sp)
 library(feather)
+library(rmapshaper)
 
 # load data
 gb_wards <- sf::read_sf("data/GB_wards_2017/GB_wards_2017.shp") %>%
-  as_tibble() %>%
-  select(-geometry) %>%
   transmute(
     code_ward = as.character(wd17cd),
     code_name = wd17nm,
@@ -22,11 +21,12 @@ constituency_turnout <- "data/constituency_turnout.csv" %>%
   transmute(
     name_constituency = Constituency,
     count_electorate = Electorate,
-    perc_turnout = `Turnout %`)
+    perc_turnout = `Turnout %`) %>%
+  distinct()
 
 constituency_lookup <- "data/GB_wards_2017/constituency_lookup.csv" %>%
   read_csv() %>%
-  transform(
+  transmute(
     code_ward = as.character(WD17CD),
     name_ward = WD17NM,
     code_constituency = PCON17CD,
@@ -35,17 +35,17 @@ constituency_lookup <- "data/GB_wards_2017/constituency_lookup.csv" %>%
 
 ward_pop <- "data/ward_pop_f30to45.csv" %>%
   read_csv() %>%
-  transform(
+  transmute(
     code_ward = as.character(ward),
     women_age30to45 = `30-45w`,
     population = pop) %>%
-  unique()
+  distinct()
 
 postcode_sector_lookup <- "data/postcode_sector_lookup.csv" %>%
   read_csv() %>%
-  transform(
+  transmute(
     code_ward = as.character(`Ward Code`),
-    code_constituency = `Parliamentary Constituency Code`,
+    code_constituency = as.character(`Parliamentary Constituency Code`),
     name_constituency = `Parliamentary Constituency Name`,
     code_euregion = `European Electoral Region Code`,
     name_euregion = `European Electoral Region Name`,
@@ -57,7 +57,8 @@ postcode_sector_lookup <- "data/postcode_sector_lookup.csv" %>%
     name_constituency_ps = first(name_constituency),
     code_euregion = first(code_euregion),
     name_euregion = first(name_euregion),
-    postcode_sectors = str_c(postcode_sector, collapse = ","))
+    postcode_sectors = str_c(postcode_sector, collapse = ",")) %>%
+  distinct()
 write_feather(postcode_sector_lookup, "data/postcode_sector_lookup.feather")
 
 
@@ -79,26 +80,55 @@ df_joined <- gb_wards %>%
 
 
 # top ten constituencies with highest % with women 30-45
-df_tidy <- df_joined %>%
+df_constituencies <- df_joined %>%
   group_by(code_constituency) %>%
   summarise(
     name_constituency = first(name_constituency), # TODO!
+    tot_pop = sum(population),
     tot_electorate = sum(unique(count_electorate)),
-    tot_pop = sum(pop),
-    women_age30to45 = sum(pop * women_age30to45) / tot_pop,
-    turnout = sum(pop * perc_turnout) / tot_pop,
-    postcode_sectors = str_c(postcode_sectors, collapse = ", ")
-  ) %>%
-  arrange(desc(women_age30to45))
-
-write_feather(x = df_tidy, path = "data/tidy_data.feather")
+    turnout = sum(population * perc_turnout) / tot_pop,
+    women_age30to45 = sum(population * women_age30to45) / tot_pop,
+    postcode_sectors = str_c(postcode_sectors, collapse = ", "),
+    do_union = TRUE) %>%
+  # simplify geometries
+  ms_simplify(keep = 0.01)
 
 
 # adding information on age and eu nationals
-postcode_age <- read_csv("data/AGESps_sector_out.csv")
-postcode_eu_nationals <- read_csv("data/EUps_sector_out.csv")
+postcode_age <- "data/AGESps_sector_out.csv" %>%
+  read_csv() %>%
+  mutate(postcode_sectors = `posstcode sector`) %>%
+  select(postcode_sectors, contains("%"))
 
-x <- df_tidy %>%
+postcode_eu_nationals <- "data/PASSPORTps_sector_out.csv" %>%
+  read_csv() %>%
+  transmute(
+    postcode_sectors = `postcode sector`,
+    perc_eu = `%`)
+
+# postcode level data
+df_postcodes <- df_constituencies %>%
+  as_tibble() %>%
   select(postcode_sectors, code_constituency, turnout, women_age30to45) %>%
   separate_rows(postcode_sectors, sep = ",") %>%
-  left_join()
+  mutate(postcode_sectors = str_replace(postcode_sectors, "^\\s+", "")) %>%
+  mutate(postcode_sectors = str_replace(postcode_sectors, "\\s+$", "")) %>%
+  distinct() %>%
+  left_join(postcode_eu_nationals, by = "postcode_sectors") %>%
+  left_join(postcode_age, by = "postcode_sectors")
+
+write_csv(df_postcodes, "out/postcode_sector_level_data.csv")
+write_feather(x = df_postcodes, path = "out/postcode_sector_data.feather")
+
+# join back to constituencies
+df_constituencies <- df_constituencies %>%
+  left_join(
+    df_postcodes %>%
+      select(-postcode_sectors, -turnout, -women_age30to45) %>%
+      group_by(code_constituency) %>%
+      summarise_all(mean, na.rm = TRUE),
+    by = "code_constituency")
+
+write_feather(x = df_constituencies, path = "out/constituency_data.feather")
+
+
