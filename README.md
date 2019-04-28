@@ -1,6 +1,12 @@
 # targeted-demographics to increase voter engagement in EU 2019 vote
 
-We came together at a hackathon to use data to improve voter engagement for the 2019 EU election. (more details after the election)
+We came together at a hackathon to use data to improve voter engagement for the 2019 EU election. 
+
+This scatterplot is a first result. It shows (for most of the 650 Constituencies) the proportion of 'voter engagement' (see below) vs women in a target demographic, each point is sized by the enrolled voter population in that Constituency:
+
+![](plot_women_vs_turnout.png)
+
+INTERPRETATION TO ADD LATER
 
 * Project source: https://github.com/dxe4/demographics
 * Slack: #targeted-demographics
