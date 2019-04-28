@@ -91,3 +91,4 @@ Master data frame with combined information from disparate sources. This was gen
 * We could try averaging voter turnout by Constituency for several elections
 * We could try getting the public electoral role for the Open Register, it should be a good proxy for voter enrollment despite people opting out (hatip chris48s in DemocracyClub)
 * Sym noted that http://manchester.academia.edu/RobertFord might have open ward-level data
+* Another source of data: the [British Election Study](https://www.britishelectionstudy.com/) wave 14 from May 2018. We also wrote some code to target at Local Authority District or NUTS2 level using these data: https://github.com/TechForUK/british_election_study
