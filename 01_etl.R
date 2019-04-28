@@ -58,6 +58,8 @@ postcode_sector_lookup <- "data/postcode_sector_lookup.csv" %>%
     code_euregion = first(code_euregion),
     name_euregion = first(name_euregion),
     postcode_sectors = str_c(postcode_sector, collapse = ","))
+write_feather(postcode_sector_lookup, "data/postcode_sector_lookup.feather")
+
 
 df_joined <- gb_wards %>%
   # join constituency
@@ -91,3 +93,12 @@ df_tidy <- df_joined %>%
 
 write_feather(x = df_tidy, path = "data/tidy_data.feather")
 
+
+# adding information on age and eu nationals
+postcode_age <- read_csv("data/AGESps_sector_out.csv")
+postcode_eu_nationals <- read_csv("data/EUps_sector_out.csv")
+
+x <- df_tidy %>%
+  select(postcode_sectors, code_constituency, turnout, women_age30to45) %>%
+  separate_rows(postcode_sectors, sep = ",") %>%
+  left_join()

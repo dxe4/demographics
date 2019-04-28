@@ -15,6 +15,7 @@ target_constituencies <- df_tidy %>%
   mutate(pclist = str_split(postcode_sectors, ",")) %>%
   select(-postcode_sectors)
 # random control group
+postcode_sector_lookup <- read_feather("data/postcode_sector_lookup.feather")
 set.seed(3)
 out_cntrl <- postcode_sector_lookup$postcode_sectors %>%
   str_split(",") %>%
