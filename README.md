@@ -40,6 +40,9 @@ List of all postcode sectors in the UK (based on the National Statistics Postcod
 
 ### r21ukrttableks102ukladv1_tcm77-330434 - r21ukrttableks102ukladv1_tcm77-330479.xls
 
+### sectors_by_constituency.csv
+For each constituency a list of all postcode sectors in that constituency.
+
 ### sex.csv
 Count of M/F and population size per Ward. 521 rows.
 
