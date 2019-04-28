@@ -16,7 +16,6 @@ ADD NOTES ON WHAT THIS GIVES US AND WHAT ELSE WE MIGHT DO (using Ian's local non
 * Slack: #targeted-demographics
 
 ## Data sources and key files (in `/data`)
-
 **TODO** Can everyone please add some notes about the files they added (including - original location, a sentence or two about the data (e.g. year, intention, any issues or thoughts you have), whether this was an input file to a process or an output file from some of our code) please.
 
 ### EU-referendum-result-data.csv
@@ -28,8 +27,7 @@ ADD NOTES ON WHAT THIS GIVES US AND WHAT ELSE WE MIGHT DO (using Ian's local non
 ### areas_lat_lon.csv
 
 ### constituency_turnout.csv
-
-Data showing the turnout and electorate size for all 650 UK constituencies at the 2015 general election (the same info for the 2017 general election was not available so this was considered a good proxy). The data was scraped from http://www.ukpolitical.info/Turnout15.htm.
+Data showing the turnout and electorate size for all 650 UK constituencies at the 2015 general election (the same info for the 2017 general election was not available so this was considered a good proxy). The data was scraped from http://www.ukpolitical.info/Turnout15.htm. Note slight changes to names of two constituencies so that they can be joined to postcode_sector_lookup.csv.
 
 ### density.csv
 
@@ -38,13 +36,11 @@ Data showing the turnout and electorate size for all 650 UK constituencies at th
 ### health.csv
 
 ### postcode_sector_lookup.csv
-
 Original data set was the National Statistics Postcode Lookup (NSPL) table for the United Kingdom. For further details read postcode_sector_lookup_creation.ipynb in data folder.
 
 ### r21ukrttableks102ukladv1_tcm77-330434 - r21ukrttableks102ukladv1_tcm77-330479.xls
 
 ### sex.csv
-
 Count of M/F and population size per Ward. 521 rows.
 
 ### ward-codes-w-30-45.csv
