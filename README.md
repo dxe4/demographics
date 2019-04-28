@@ -69,7 +69,7 @@ Master data frame with combined information from disparate sources. This was gen
 **TODO** can anyone who wrote code please note the high-level process. The goal would be to let one of us (or a likeminded soul) follow the flow of code and data in e.g. 6 months time - so add enough detail to assume that we've forgotten everything and need some nudges in the right direction please.
 
 
-`spatial_data.R` reads `ward_pop_f30to45.csv` and later writes `tidy_data.feather`.
+`01_etl.R` reads data from a number of `csv`s and later writes `tidy_data.feather`.
 
 ## Contributors
 
