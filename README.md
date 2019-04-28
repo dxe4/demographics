@@ -41,9 +41,15 @@ ADD NOTES ON WHAT THIS GIVES US AND WHAT ELSE WE MIGHT DO (using Ian's local non
 
 ### sex.csv
 
+Count of M/F and population size per Ward. 521 rows.
+
 ### ward-codes-w-30-45.csv
 
+DUPLICATE of ward_pop_f30to45.csv (and used in Notebooks) - SHOULD BE DELETED?
+
 ### ward_pop_f30to45.csv
+
+Per Ward counts of electorate (nbr people eligible to vote) and percentage of those who voted in 2015 General Election. 8297 rows.
 
 ### ward_to_local_district.csv
 
@@ -55,11 +61,14 @@ Note folder has a small readme by Laurens (?)
 
 ### tidy_data.feather
 
+Written by `spatial_data.R`.
 
 ## How to run the code
 
 **TODO** can anyone who wrote code please note the high-level process. The goal would be to let one of us (or a likeminded soul) follow the flow of code and data in e.g. 6 months time - so add enough detail to assume that we've forgotten everything and need some nudges in the right direction please.
 
+
+`spatial_data.R` reads `ward_pop_f30to45.csv` and later writes `tidy_data.feather`.
 
 ## Contributors
 
