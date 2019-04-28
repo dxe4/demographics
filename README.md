@@ -71,6 +71,17 @@ Geospatial and tabular data, as well as a lookup table to match wards to constit
 * http://geoportal.statistics.gov.uk/datasets/wards-december-2017-generalised-clipped-boundaries-in-great-britain
 * http://geoportal.statistics.gov.uk/datasets/ward-to-westminster-parliamentary-constituency-to-local-authority-district-december-2017-lookup-in-the-united-kingdom
 
+### postcode_sector_level_data.csv
+
+Generated on the Sunday by Laurens (and others? Alex?), merging Constituency, Turnout, women30-45, EU and young people for slicing and dicing:
+
+```
+postcode_sectors,code_constituency,turnout,women_age30to45,perc_eu,10to14%,15%,16to17%,18to19%,20to24%,25to29%,30to44%
+GU12 4,E14000530,63.77,0.1174158,2.9,6,1.4,3,2.6,6.9,7.6,24.9
+```
+
+15k rows. Turnout is percent of electorate, wom is percent (e.g. 0.11 as 11%), perc_eu etc are % as for turnout.
+
 ### tidy_data.feather
 Master data frame with combined information from disparate sources. This was generated from individual csvs and shapefiles by running `01_etl.R`
 
@@ -80,6 +91,23 @@ Master data frame with combined information from disparate sources. This was gen
 `01_etl.R` reads data from different sources and produces a dataset at constituency level in `feather` format (`data/constituency_data.feather`). This data is then used in `02_plots.R` to generate visualisations and `03_experiment_selection.R` to choose a number of postcodes that we conducted geo-experients for. If you are interested in postcode-level data you can also use `data/postcode_sector_data.feather`. However, be aware that some data that wasn't available at postcode sector level was assumed constant for all postcode sectors in a single constituency.
 
 `titled.ipynb` and `Untitled.ipynb` appear to do some work on the health data (via Harry perhaps?) and these Notebooks produce no output.
+
+
+### First micro result
+
+Result of test by Pranay overnight on a small ad sample
+
+```
+Audience    Unique Reach    Click-through Rate
+Control Group 	3354    	14.71%
+Kensington  	64 		0
+Barking    	51 		0
+Slough    	204 		50%
+Hackney North  	439  		22.22%
+Hackney South 	558  		7.69%
+```
+
+This is documented in: 04_eval.R
 
 ## Note from Mel on "who we might target"
 
@@ -107,19 +135,6 @@ EU Election targeting breakdown:·       Students;
 * jonathanf (DemocracyClub)
 * sym (DemocracyClub)
 
-## First micro result
-
-Result of test by Pranay overnight on a small ad sample
-
-```
-Audience    Unique Reach    Click-through Rate
-Control Group 	3354    	14.71%
-Kensington  	64 		0
-Barking    	51 		0
-Slough    	204 		50%
-Hackney North  	439  		22.22%
-Hackney South 	558  		7.69%
-```
 
 ## Future
 * We could try averaging voter turnout by Constituency for several elections
