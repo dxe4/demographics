@@ -6,7 +6,9 @@ This scatterplot is a first result. It shows (for most of the 650 Constituencies
 
 ![](plot_women_vs_turnout.png)
 
-INTERPRETATION TO ADD LATER
+'Voter engagement' is calculated by taking the percentage of people who voted in the 2015 General Election (a 'normal' election, unlike the 2017 rushed GE) and the enrolled population size who are eligible to vote in that Constituency. Some Constituencies have a much lower turn-out than others (range circa 52-78%, most are in the range 60-75%).
+
+__Note__ that this is a proxy for engagement and it is likely to be noisy. It was noted by colleagues (hat tip Sym) in the DemocracyClub slack that using 1 GE will be noisy and we'd do better to calculate engagement by averaging results over several elections, this could be a __future project__.
 
 * Project source: https://github.com/dxe4/demographics
 * Slack: #targeted-demographics
