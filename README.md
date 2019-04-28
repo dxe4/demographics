@@ -1,4 +1,4 @@
-# targeted-demographics to increase voter engagement in EU 2019 vote
+# Targeted-demographics to increase turnout in the 2019 EU election
 
 We came together at a hackathon to use data to improve voter engagement for the 2019 EU election. 
 
@@ -54,15 +54,15 @@ Per Ward counts of electorate (nbr people eligible to vote) and percentage of th
 
 ### ward_to_local_district.csv
 
-### GB_wards
-
-Note folder has a small readme by Laurens (?)
-
 ### GB_wards_2017
+
+Geospatial and tabular data, as well as a lookup table to match wards to constituencies. Downloaded from the Office for National Statistics:
+* http://geoportal.statistics.gov.uk/datasets/wards-december-2017-generalised-clipped-boundaries-in-great-britain
+* http://geoportal.statistics.gov.uk/datasets/ward-to-westminster-parliamentary-constituency-to-local-authority-district-december-2017-lookup-in-the-united-kingdom
 
 ### tidy_data.feather
 
-Written by `spatial_data.R`.
+Master data frame with combined information from disparate sources. This was generated from individual csvs and shapefiles by running `01_etl.R`
 
 ## How to run the code
 
@@ -78,7 +78,7 @@ Written by `spatial_data.R`.
 * harry
 * Ian Ozsvald, @ianozsvald, https://www.linkedin.com/in/ianozsvald
 * jdleesmiller
-* Laurens
+* Laurens Geffert, @JanLauGe, https://www.linkedin.com/in/laurensgeffert/
 * Pranay
 * Nafiz Huq / Nick
 
