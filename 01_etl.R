@@ -1,8 +1,10 @@
 
 library(fs)
 library(tidyverse)
+library(magrittr)
 library(sf)
 library(sp)
+library(feather)
 
 # load data
 gb_wards <- sf::read_sf("data/GB_wards_2017/GB_wards_2017.shp") %>%
@@ -57,7 +59,6 @@ postcode_sector_lookup <- "data/postcode_sector_lookup.csv" %>%
     name_euregion = first(name_euregion),
     postcode_sectors = str_c(postcode_sector, collapse = ","))
 
-
 df_joined <- gb_wards %>%
   # join constituency
   left_join(
@@ -88,63 +89,5 @@ df_tidy <- df_joined %>%
   ) %>%
   arrange(desc(women_age30to45))
 
-feather::write_feather(x = df_tidy, path = "data/tidy_data.feather")
+write_feather(x = df_tidy, path = "data/tidy_data.feather")
 
-ggp <- ggplot(df_tidy, aes(
-  x = women_age30to45, 
-  y = turnout, 
-  size = tot_electorate)) +
-  geom_point(alpha = .5) +
-  theme_minimal() +
-  xlab("Percentage of Women aged 30 to 45") +
-  ylab("Election turnout in the 2015 election") +
-  ggtitle(
-    label = "Turnout vs Target Female Group in English and Welsh Constituencies",
-    subtitle = "Most promising targets are constituencies the bottom right") +
-  guides(size = guide_legend(
-    title = "Size of electorate \nin constituency", title.position = "top"))
-
-ggsave(filename = "plot_women_vs_turnout.png", plot = ggp)
-
-target_constituencies <- df_tidy %>%
-  filter(
-    turnout < 60 &
-    women_age30to45 > .13) %>%
-  pluck("code_constituency")
-
-# target post code sectors
-out <- df_tidy %>%
-  filter(turnout < 60 & women_age30to45 > .13) %>%
-  select(name_constituency, postcode_sectors) %>%
-  mutate(pclist = str_split(postcode_sectors, ",")) %>%
-  select(-postcode_sectors)
-# random control group
-set.seed(3)
-out_cntrl <- postcode_sector_lookup$postcode_sectors %>%
-  str_split(",") %>%
-  unlist() %>%
-  sample(size = 100)
-
-# write output
-file_delete("out.txt")
-file_create("out.txt")
-for (const in out[["name_constituency"]]) {
-  x <- out %>% 
-    filter(name_constituency == const) %>%
-    pluck("pclist") %>%
-    unlist() %>%
-    str_replace("^\\s", "")
-  write_lines(
-    x = const,
-    path = "out.txt",
-    append = TRUE)
-  write_lines(
-    x = x, 
-    path = "out.txt",
-    append = TRUE)
-}
-# add control group to output
-write_lines(
-  x = c("Control Group", out_cntrl), 
-  path = "out.txt",
-  append = TRUE)
