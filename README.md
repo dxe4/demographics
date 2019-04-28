@@ -68,7 +68,7 @@ Master data frame with combined information from disparate sources. This was gen
 
 ## Contributors
 * AlexG
-* Emiliano Cancellieri
+* Emiliano Cancellieri, https://www.linkedin.com/in/emilianocancellieri/
 * harry
 * Ian Ozsvald, @ianozsvald, https://www.linkedin.com/in/ianozsvald
 * jdleesmiller
