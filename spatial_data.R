@@ -8,7 +8,7 @@ library(sp)
 gb_wards <- sf::read_sf("data/GB_wards_2017/GB_wards_2017.shp") %>%
   as_tibble() %>%
   select(-geometry) %>%
-  transform(
+  transmute(
     code_ward = as.character(wd17cd),
     code_name = wd17nm,
     lat = lat,
@@ -79,23 +79,72 @@ df_joined <- gb_wards %>%
 df_tidy <- df_joined %>%
   group_by(code_constituency) %>%
   summarise(
-    name = first(name_constituency), # TODO!
-    tot_pop = sum(pop),
+    name_constituency = first(name_constituency), # TODO!
     tot_electorate = sum(unique(count_electorate)),
+    tot_pop = sum(pop),
     women_age30to45 = sum(pop * women_age30to45) / tot_pop,
-    turnout = sum(pop * perc_turnout) / tot_pop
+    turnout = sum(pop * perc_turnout) / tot_pop,
+    postcode_sectors = str_c(postcode_sectors, collapse = ", ")
   ) %>%
   arrange(desc(women_age30to45))
 
 feather::write_feather(x = df_tidy, path = "data/tidy_data.feather")
 
-ggplot(df_tidy, aes(
+ggp <- ggplot(df_tidy, aes(
   x = women_age30to45, 
   y = turnout, 
   size = tot_electorate)) +
   geom_point(alpha = .5) +
   theme_minimal() +
   xlab("Percentage of Women aged 30 to 45") +
-  ylab("Election turnout in the 2015 election")
+  ylab("Election turnout in the 2015 election") +
+  ggtitle(
+    label = "Turnout vs Target Female Group in English and Welsh Constituencies",
+    subtitle = "Most promising targets are constituencies the bottom right") +
+  guides(size = guide_legend(
+    title = "Size of electorate \nin constituency", title.position = "top"))
 
+ggsave(filename = "plot_women_vs_turnout.png", plot = ggp)
 
+target_constituencies <- df_tidy %>%
+  filter(
+    turnout < 60 &
+    women_age30to45 > .13) %>%
+  pluck("code_constituency")
+
+# target post code sectors
+out <- df_tidy %>%
+  filter(turnout < 60 & women_age30to45 > .13) %>%
+  select(name_constituency, postcode_sectors) %>%
+  mutate(pclist = str_split(postcode_sectors, ",")) %>%
+  select(-postcode_sectors)
+# random control group
+set.seed(3)
+out_cntrl <- postcode_sector_lookup$postcode_sectors %>%
+  str_split(",") %>%
+  unlist() %>%
+  sample(size = 100)
+
+# write output
+file_delete("out.txt")
+file_create("out.txt")
+for (const in out[["name_constituency"]]) {
+  x <- out %>% 
+    filter(name_constituency == const) %>%
+    pluck("pclist") %>%
+    unlist() %>%
+    str_replace("^\\s", "")
+  write_lines(
+    x = const,
+    path = "out.txt",
+    append = TRUE)
+  write_lines(
+    x = x, 
+    path = "out.txt",
+    append = TRUE)
+}
+# add control group to output
+write_lines(
+  x = c("Control Group", out_cntrl), 
+  path = "out.txt",
+  append = TRUE)
