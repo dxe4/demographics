@@ -36,7 +36,7 @@ Data showing the turnout and electorate size for all 650 UK constituencies at th
 ### health.csv
 
 ### postcode_sector_lookup.csv
-Based on the National Statistics Postcode Lookup (NSPL) table for the United Kingdom. Further details are in `postcode_sector_lookup_creation.ipynb`.
+List of all postcode sectors in the UK (based on the National Statistics Postcode Lookup (NSPL) table for the UK). Further details are in `postcode_sector_lookup_creation.ipynb`.
 
 ### r21ukrttableks102ukladv1_tcm77-330434 - r21ukrttableks102ukladv1_tcm77-330479.xls
 
