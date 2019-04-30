@@ -51,17 +51,13 @@ DUPLICATE of ward_pop_f30to45.csv (and used in Notebooks) - SHOULD BE DELETED?
 ### ward_pop_f30to45.csv
 Per Ward counts of electorate (nbr people eligible to vote) and percentage of those who voted in 2015 General Election. 8297 rows.
 
-### EUps_sector_in.csv and EUps_sector_out.csv
-Data from census England-Wales 2011 for UK residents born in EU countries (except UK) at the granular level of postcode sector. "in" for the row file downloaded from http://www.nomisweb.co.uk/query/select/getdatasetbytheme.asp?collapse=yes) and "out" for the data after cleansing.
+## Data at the postalcode sector granularity level
+The data were collected on Sunday 28th April 2019 from the census of England and Wales of 2011 (http://www.nomisweb.co.uk/query/select/getdatasetbytheme.asp?collapse=yes). The uploaded files are "in" for the original files downloaded from the website and "out" for the one used to build the final cleaned table tidy_data.feather. The downloaded data are for the following cathegories:
 
-### PASSPORTps_sector_in.csv and PASSPORTps_sector_out.csv
-Data from census England-Wales 2011 for UK residents with only or also a EU passport at the granular level of postcode sector. "in" for the row file downloaded from http://www.nomisweb.co.uk/query/select/getdatasetbytheme.asp?collapse=yes) and "out" for the data after cleansing.
-
-### WOMEN30_45ps_sector_in.csv, MENps_sector_in.csv, and WOMEN30_45ps_sector_out.csv
-Data from census England-Wales 2011 for women in the age range 30-45 at the granular level of postcode sector. "in" for the row file downloaded from http://www.nomisweb.co.uk/query/select/getdatasetbytheme.asp?collapse=yes) and "out" for the data after cleansing. The "MEN" file is used to find the percentage of women, in the age range, over the total population of the postalcode sector.
-
-### AGESps_sector_in.csv and AGESps_sector_out.csv
-Data from census England-Wales 2011 for UK residents in the age range 10-44 at the granular level of postcode sector. "in" for the row file downloaded from http://www.nomisweb.co.uk/query/select/getdatasetbytheme.asp?collapse=yes) and "out" for the data after cleansing. The age range has been chosen considering that these are the 2011 data (people 11 years old in 2011 are now 19 and are above vote age)
+EU born individuals resident in UK
+EU passport owners resident in UK
+Women 30-45
+Young people (people aged 10 in 2011 can now vote)
 
 
 ### ward_to_local_district.csv
