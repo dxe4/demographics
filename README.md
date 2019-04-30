@@ -52,12 +52,19 @@ DUPLICATE of ward_pop_f30to45.csv (and used in Notebooks) - SHOULD BE DELETED?
 Per Ward counts of electorate (nbr people eligible to vote) and percentage of those who voted in 2015 General Election. 8297 rows.
 
 ## Data at the postalcode sector granularity level
-The data were collected on Sunday 28th April 2019 from the census of England and Wales of 2011 (http://www.nomisweb.co.uk/query/select/getdatasetbytheme.asp?collapse=yes). The uploaded files are "in" for the original files downloaded from the website and "out" for the one used to build the final cleaned table tidy_data.feather. The downloaded data are for the following cathegories:
 
-EU born individuals resident in UK
-EU passport owners resident in UK
-Women 30-45
-Young people (people aged 10 in 2011 can now vote)
+### postcode_sector_level_data.csv
+
+Generated on the Sunday using data from census 2011:
+
+```
+postcode_sectors,code_constituency,turnout,women_age30to45,perc_eu,10to14%,15%,16to17%,18to19%,20to24%,25to29%,30to44%
+GU12 4,E14000530,63.77,0.1174158,2.9,6,1.4,3,2.6,6.9,7.6,24.9
+```
+
+The data were collected on Sunday 28th April 2019 from the census of England and Wales of 2011 (http://www.nomisweb.co.uk/query/select/getdatasetbytheme.asp?collapse=yes). The uploaded files are "in" for the original files downloaded from the website and "out" for the one used to build the final cleaned table tidy_data.feather.
+
+The downloaded data are for the following cathegories: EU born individuals resident in UK (`EUps_sector_in.csv`,`EUps_sector_out.csv`), EU passport owners resident in UK (`PASSPORTps_sector_in.csv`,`PASSPORTps_sector_out.csv`), women 30-45 (`WOMEN30_45ps_sector_in.csv`,`MENps_sector_in.csv`,`WOMEN30_45ps_sector_out.csv`), young people aged 10 in 2011 that can now vote (`AGESps_sector_in.csv`,`AGESps_sector_out.csv`)
 
 
 ### ward_to_local_district.csv
@@ -67,16 +74,6 @@ Geospatial and tabular data, as well as a lookup table to match wards to constit
 * http://geoportal.statistics.gov.uk/datasets/wards-december-2017-generalised-clipped-boundaries-in-great-britain
 * http://geoportal.statistics.gov.uk/datasets/ward-to-westminster-parliamentary-constituency-to-local-authority-district-december-2017-lookup-in-the-united-kingdom
 
-### postcode_sector_level_data.csv
-
-Generated on the Sunday by Laurens (and others? Alex?), merging Constituency, Turnout, women30-45, EU and young people for slicing and dicing:
-
-```
-postcode_sectors,code_constituency,turnout,women_age30to45,perc_eu,10to14%,15%,16to17%,18to19%,20to24%,25to29%,30to44%
-GU12 4,E14000530,63.77,0.1174158,2.9,6,1.4,3,2.6,6.9,7.6,24.9
-```
-
-15k rows. Turnout is percent of electorate, wom is percent (e.g. 0.11 as 11%), perc_eu etc are % as for turnout.
 
 ### tidy_data.feather
 Master data frame with combined information from disparate sources. This was generated from individual csvs and shapefiles by running `01_etl.R`
