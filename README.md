@@ -64,7 +64,7 @@ GU12 4,E14000530,63.77,0.1174158,2.9,6,1.4,3,2.6,6.9,7.6,24.9
 
 The data were collected on Sunday 28th April 2019 from the census of England and Wales of 2011 (http://www.nomisweb.co.uk/query/select/getdatasetbytheme.asp?collapse=yes). The uploaded files are "in" for the original files downloaded from the website and "out" for the one used to build the final cleaned table tidy_data.feather.
 
-The downloaded data are for the following cathegories: EU born individuals resident in UK (`EUps_sector_in.csv`,`EUps_sector_out.csv`), EU passport owners resident in UK (`PASSPORTps_sector_in.csv`,`PASSPORTps_sector_out.csv`), women 30-45 (`WOMEN30_45ps_sector_in.csv`,`MENps_sector_in.csv`,`WOMEN30_45ps_sector_out.csv`), young people aged 10 in 2011 that can now vote (`AGESps_sector_in.csv`,`AGESps_sector_out.csv`)
+The downloaded data are for the following cathegories: EU born individuals resident in UK (`EUps_sector_in.csv`,`EUps_sector_out.csv`), EU passport owners resident in UK (`PASSPORTps_sector_in.csv`,`PASSPORTps_sector_out.csv`), women 30-45 (`WOMEN30_45ps_sector_in.csv`,`MENps_sector_in.csv`,`WOMEN30_45ps_sector_out.csv`), young people aged 10 in 2011 that can now vote (`AGESps_sector_in.csv`,`AGESps_sector_out.csv`), different etnichs groups (`ETNICHGROUPSps_sector_in.csv`,`ETNICHGROUPSps_sector_out.csv`).
 
 
 ### ward_to_local_district.csv
