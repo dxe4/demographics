@@ -41,6 +41,11 @@ ward_pop <- "data/ward_pop_f30to45.csv" %>%
     population = pop) %>%
   distinct()
 
+minorities_ps <- "data/ETNICHGROUPSps_sector_out.csv" %>%
+  read_csv() %>%
+  mutate(postcode_sectors = `posstcode sector`) %>%
+  select(-`posstcode sector`)
+
 postcode_sector_lookup <- "data/postcode_sector_lookup.csv" %>%
   read_csv() %>%
   transmute(
@@ -115,7 +120,8 @@ df_postcodes <- df_constituencies %>%
   mutate(postcode_sectors = str_replace(postcode_sectors, "\\s+$", "")) %>%
   distinct() %>%
   left_join(postcode_eu_nationals, by = "postcode_sectors") %>%
-  left_join(postcode_age, by = "postcode_sectors")
+  left_join(postcode_age, by = "postcode_sectors") %>%
+  left_join(minorities_ps, by = "postcode_sectors")
 
 write_csv(df_postcodes, "out/postcode_sector_level_data.csv")
 write_feather(x = df_postcodes, path = "out/postcode_sector_data.feather")
